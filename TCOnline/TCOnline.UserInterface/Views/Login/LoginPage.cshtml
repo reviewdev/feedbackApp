@@ -1,0 +1,84 @@
+﻿@model TCOnline.UserInterface.Models.UserViewModel
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <style>
+        #login-div {
+            position: absolute;
+            left: 20%;
+            top: 20%;
+            border: 3px solid blue;
+            padding: 20px 20px;
+        }
+    </style>
+    <link rel="stylesheet" href="~/Content/site.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div id="login-div">
+        @using (Html.BeginForm("Autherize", "Login", FormMethod.Post))
+        {
+            <table>
+                <tr>
+                    <td></td>
+                    <td style="text-decoration:underline">Login Form</td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+
+                <tr>
+                    <td></td>
+                    <td>@Html.ValidationMessageFor(model => model.UserName)</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.UserName)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.UserName)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>@Html.ValidationMessageFor(model => model.Password)</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.Password)
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.Password)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <label class="field-validation-error">@Html.DisplayFor(model => model.LoginErrorMessage)</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>  </td>
+                    <td>
+                        <input type="submit" name="name" value="Login" />
+
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+</body>
+
+</html>

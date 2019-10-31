@@ -1,0 +1,106 @@
+﻿@model  TCOnline.UserInterface.Models.FeedbackViewModel
+
+@{
+   
+    if (Session["UserID"] == null)
+    {
+        Response.Redirect("~/Login/LoginPage");
+    }  
+
+}
+<br />
+
+@if (Model.Id == 0)
+{
+    <h2>Please Submit Your Feedback</h2>
+}
+else
+{
+    <h2>Feedback Review</h2>
+}
+<br />
+
+<div class="form-body">
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.Id);
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rating)<br />
+            @Html.ValidationMessageFor(model => model.Rating)
+            <div class="radio">
+                <label for="ExcellentRating">
+                    @if (Model.Id == 0)
+                    {
+                        @Html.RadioButtonFor(model => model.Rating, 1, new { @id = "ExcellentRating" })
+                    }
+                    else
+                    {
+                        @Html.RadioButtonFor(model => model.Rating, 1, new { @id = "ExcellentRating", @disabled = "disabled" })
+                    }
+                    <text>Excellent</text>
+                </label>
+            </div>
+            <div class="radio">
+                <label for="ModerateRating">
+                    @if (Model.Id == 0)
+                    {
+                        @Html.RadioButtonFor(model => model.Rating, 2, new { @id = "ModerateRating" })
+                    }
+                    else
+                    {
+                        @Html.RadioButtonFor(model => model.Rating, 2, new { @id = "ModerateRating", @disabled = "disabled" })
+                    }
+                    <text>Moderate</text>
+                </label>
+            </div>
+            <div class="radio">
+                <label for="ImprovementRating">
+                    @if (Model.Id == 0)
+                    {
+
+                        @Html.RadioButtonFor(model => model.Rating, 3, new { @id = "ImprovementRating" })
+                    }
+                    else
+                    {
+                        @Html.RadioButtonFor(model => model.Rating, 3, new { @id = "ImprovementRating", @disabled = "disabled" })
+                    }
+                    <text>Needs Improvement</text>
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Comment)<br />
+            @Html.ValidationMessageFor(model => model.Comment)
+            @if (Model.Id == 0)
+            {
+                @Html.TextAreaFor(model => model.Comment, new { @class = "form-control comment-textbox", placeholder = "Max 250 characters", rows = 5, cols = 200 })
+            }
+            else
+            {
+                @Html.TextAreaFor(model => model.Comment, new { @class = "form-control comment-textbox", placeholder = "Max 250 characters", rows = 5, cols = 200, @readonly = "readonly" })
+
+            }
+        </div>
+
+
+        <br />
+        <br />
+
+        if (Model.Id == 0)
+        {
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn button" />
+
+            </div>
+        }
+    }
+
+</div>
+
+
+
+
+
+

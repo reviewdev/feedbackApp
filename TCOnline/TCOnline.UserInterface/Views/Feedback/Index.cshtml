@@ -1,0 +1,70 @@
+﻿@model IEnumerable<TCOnline.UserInterface.Models.FeedbackViewModel>
+
+@{
+    if (Session["UserID"] == null)
+    {
+        Response.Redirect("~/Login/LoginPage");
+    }
+}
+
+
+<h2>Index</h2>
+
+<table>
+
+    <tr>
+        <td>
+            <a href="@Url.Action("CreateOrReview", "Feedback")" class="btn btn-default"> <i class="fa fa-plus"></i> Create New Employee </a>
+        </td>
+        <td>  &nbsp; &nbsp; </td>
+        <td>
+            <a href="@Url.Action("logout", "Login")" class="btn btn-default"><i class="fa fa-sign-out"></i> Logout</a>
+        </td>
+    </tr>
+</table>
+
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
+            <th>
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @{
+                    if (item.Rating == 1)
+                    {
+                        <text>Excellent</text>
+                    }
+                    else if (item.Rating == 2)
+                    {
+                        <text>Moderate</text>
+                    }
+                    else if (item.Rating == 3)
+                    {
+                        <text>Needs Improvement</text>
+                    }
+                }
+            </td>
+            <td></td>
+
+            <td>
+                <a href="@Url.Action("CreateOrReview", "Feedback", new {id=item.Id})" class="btn btn-default"><i class="fa fa-pencil"></i> Review </a>
+                @*<a onclick="Delete(@item.Id)" class="btn btn-default"><i class="fa fa-trash"></i> Delete </a>*@
+            </td>
+        </tr>
+    }
+
